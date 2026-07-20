@@ -1,6 +1,6 @@
 create extension if not exists pgcrypto;
 
-create table public.profiles (
+create table if not exists public.profiles (
   id uuid primary key default gen_random_uuid(),
   auth_user_id uuid not null unique references auth.users(id) on delete cascade,
   full_name text not null,
@@ -9,6 +9,7 @@ create table public.profiles (
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
+
 
 create table public.preferences (
   id uuid primary key default gen_random_uuid(),
